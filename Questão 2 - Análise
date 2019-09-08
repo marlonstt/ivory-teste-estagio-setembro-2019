@@ -1,0 +1,114 @@
+using System;
+
+//Marlon Sttefane Guimarães Silva
+//09/2019
+
+namespace Questao_2___Analise
+{
+    class Program
+    {
+        // Pegar nome usuario
+        public class Pessoa
+        {
+            public string Nome(string nome)
+            {
+                Console.WriteLine(" Digite seu nome: ");
+                nome = Console.ReadLine();
+                return nome;
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            // Isntancia a classe Pessoa para pode chamar o metodo da classe
+            Pessoa pessoa = new Pessoa();
+            var nome = "a";
+            nome = pessoa.Nome(nome);
+            
+            // Cria a matriz de acordo com o número de caracteres do nome sendo linha = nome.Length e coluna = 3
+            var linha = (nome.Length + 2);
+            var coluna = 3;
+            string[,] nomeMatriz = new string[linha, coluna];
+
+            // Variaveis auxiliares para percorrer a matriz
+            var j = 0;
+            var auxiliar = linha;
+
+            for (var i = 0; i <= nomeMatriz.Length; i++)
+            {
+                // Preenche a primeira linha da matriz com os números necessários
+                if (i < linha)
+                {
+                nomeMatriz[i, j] = (i + 1).ToString();
+                }
+
+                // Se i alcançar o tamanho da primeira linha--(linha-1 porque a matriz se inicia em 0) da matriz
+                if (i == (linha-1))
+                {
+                    // j desce para a 2º coluna da matriz
+                    j++;
+
+                    // Preenche o proximo numero em sentido horario no ultimo quadro da 2º coluna na matriz
+                    nomeMatriz[i, j] = (i+2).ToString();
+                    
+                    // Preenche o primeiro quadro da segunda coluna com o numero que representa maximo de numeros entorno do nome
+                    var preenchenome = 0;
+                    nomeMatriz[preenchenome, j] = ((linha * coluna) - nome.Length).ToString();
+
+                    // Retorna a string letra por letra e adiciona no centro da matriz
+                    foreach (var aux in nome)
+                    {
+                        if (preenchenome == 0)
+                        {
+                            preenchenome++;
+                            nomeMatriz[(preenchenome), j] = aux.ToString();
+                        }
+                        else
+                        {
+                            nomeMatriz[preenchenome, j] = aux.ToString();
+                        }
+                        preenchenome++;
+                    }
+                    
+                    // j desce para a 3º coluna da matriz
+                    j++;
+                }
+
+                // Preenche a 3º linha da matriz
+                if (j == 2 && i > linha+1 && i < (nomeMatriz.Length - nome.Length))
+                {
+                    auxiliar--;
+                    nomeMatriz[auxiliar, j] = (i).ToString();
+                }
+                
+            }
+            
+            // Imprime a matriz
+            for (var x = 0; x < coluna; x++)
+            {
+                for (var z = 0; z < linha; z++)
+                {
+                    if (x == 0)
+                    {
+                        Console.Write("[" + nomeMatriz[z, x] + "] ");
+                        if (z == linha - 1)
+                            Console.Write("\n");
+                    }
+
+                    if(x == 1)
+                    {
+                        Console.Write("[" + nomeMatriz[z, x] + "] ");
+                        if (z == linha - 1)
+                            Console.Write("\n");
+                    }
+
+                    if (x == 2)
+                    {
+                        Console.Write("[" + nomeMatriz[z, x] + "]");
+                    }
+                }
+            }
+            Console.ReadKey();
+        }
+    }
+}
