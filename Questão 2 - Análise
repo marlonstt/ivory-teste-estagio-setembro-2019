@@ -20,7 +20,7 @@ namespace Questao_2___Analise
         
         static void Main(string[] args)
         {
-            // Isntancia a classe Pessoa para pode chamar o metodo da classe
+            // Isntancia a classe Pessoa para poder chamar o metodo da classe
             Pessoa pessoa = new Pessoa();
             var nome = "a";
             nome = pessoa.Nome(nome);
